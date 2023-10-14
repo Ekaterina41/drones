@@ -69,4 +69,70 @@ While implementing your solution **please take care of the following requirement
 
 ---
 
+### Instructions
+
+todo add:
+java 17+ version
+
+#### Build jar
+
+#### Run the application
+
+#### Run tests
+
+#### Requests
+
+1. Register drone
+
+```
+POST /drone/register
+Body:
+{
+   "serialNumber": "DRN011",
+   "model": "LIGHTWEIGHT",
+   "weightLimit": 100,
+   "batteryLevel": 50
+}
+```
+
+2. Load drone
+```
+PUT /drone/2/load?isFinalLoad=true
+Body:
+[
+    {
+        "name": "Medication 4",
+        "weight": 100,
+        "code": "M832",
+        "image": "medication_4.jpg"
+    },
+    {
+        "name": "Medication 5",
+        "weight": 100,
+        "code": "M333",
+        "image": "medication_5.jpg"
+    }
+]
+```
+
+3. Get loaded medications
+
+```
+GET /drone/2/items
+```
+
+4. Get available drones
+
+```
+GET /drone/available
+```
+
+5. Get battery level
+
+```
+GET /drone/2/batteryLevel
+```
+
+---
+
 :scroll: **END** 
