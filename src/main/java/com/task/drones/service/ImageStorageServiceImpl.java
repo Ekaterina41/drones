@@ -56,7 +56,7 @@ public class ImageStorageServiceImpl implements ImageStorageService {
     }
 
     @Override
-    public Resource downloadFileAsResource(String fileName, HttpServletRequest request) { // todo unused
+    public Resource downloadFileAsResource(String fileName) {
         try {
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());

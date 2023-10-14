@@ -20,5 +20,5 @@ public interface ImageStorageService {
      * @param fileName image file name
      * @return resource
      */
-    Resource downloadFileAsResource(String fileName, HttpServletRequest request);
+    Resource downloadFileAsResource(String fileName);
 }

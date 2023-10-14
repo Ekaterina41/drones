@@ -3,14 +3,15 @@ package com.task.drones.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
  * DTO containing the information about the medication.
  */
 @Data
+@Accessors(chain = true)
 public class MedicationDTO {
 
     @NotBlank(message = "Name is required.")

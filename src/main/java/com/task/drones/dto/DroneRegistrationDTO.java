@@ -2,6 +2,7 @@ package com.task.drones.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import static jakarta.validation.constraints.Pattern.Flag.CASE_INSENSITIVE;
 
@@ -9,6 +10,7 @@ import static jakarta.validation.constraints.Pattern.Flag.CASE_INSENSITIVE;
  * DTO containing the information about the registered drone.
  */
 @Data
+@Accessors(chain = true)
 public class DroneRegistrationDTO {
     @NotBlank(message = "Serial number is required.")
     @Size(min = 1, max = 100, message = "The length of serial number must be between 1 and 100 characters.")

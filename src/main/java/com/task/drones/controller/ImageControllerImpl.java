@@ -27,7 +27,7 @@ public class ImageControllerImpl implements ImageController {
     @GetMapping("/download/{fileName}")
     public ResponseEntity<Resource> downloadImage(@PathVariable String fileName,
                                                   HttpServletRequest request) {
-        Resource resource = imageStorageService.downloadFileAsResource(fileName, request);
+        Resource resource = imageStorageService.downloadFileAsResource(fileName);
 
         // Determine file's content type
         String contentType = null;

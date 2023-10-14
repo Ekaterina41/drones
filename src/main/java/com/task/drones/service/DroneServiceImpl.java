@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -58,7 +59,7 @@ public class DroneServiceImpl implements DroneService {
                         .setName(dto.getName())
                         .setWeight(dto.getWeight())
                         .setCode(dto.getCode())
-                        .setImage(dto.getImage())
+                        .setImageUrl(saveImage(dto.getImage()))
                         .setDrone(drone))
                 .toList();
 
@@ -85,8 +86,6 @@ public class DroneServiceImpl implements DroneService {
         } else {
             drone.setState(Drone.State.LOADING);
         }
-
-
 
         return droneRepository.save(drone);
     }
