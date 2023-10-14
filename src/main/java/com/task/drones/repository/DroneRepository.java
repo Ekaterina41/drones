@@ -14,4 +14,5 @@ import java.util.List;
 public interface DroneRepository extends CrudRepository<Drone, Integer> {
 
     List<Drone> findByStateIn(Collection<Drone.State> states);
+    List<Drone> findAll();
 }
