@@ -1,5 +1,6 @@
 package com.task.drones.controller;
 
+import com.task.drones.dto.MedicationDTO;
 import com.task.drones.dto.MedicationsListDTO;
 import com.task.drones.dto.DroneRegistrationDTO;
 import jakarta.validation.Valid;
@@ -32,9 +33,9 @@ public interface DroneController {
      *                    expected
      * @return loaded drone
      */
-    @PutMapping("/{droneId}/load")
+    @PostMapping(path = "/{droneId}/load", consumes = {"multipart/form-data"})
     ResponseEntity<Object> loadDrone(@PathVariable Integer droneId,
-                                     @RequestBody @Valid
+                                     @ModelAttribute @Valid
                                      MedicationsListDTO medicationsDTO,
                                      @RequestParam(defaultValue = "true") boolean isFinalLoad);
 

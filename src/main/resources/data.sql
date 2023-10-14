@@ -32,11 +32,11 @@ VALUES ('DRN010', 'MIDDLEWEIGHT', 210, 68, 'IDLE');
 
 -- Init loaded Medications in the database
 
-INSERT INTO medication (name, weight, code, image, drone_id)
+INSERT INTO medication (name, weight, code, image_url, drone_id)
 VALUES ('Medication 1', 125, 'M123', 'medication_1.jpg', 4);
 
-INSERT INTO medication (name, weight, code, image, drone_id)
+INSERT INTO medication (name, weight, code, image_url, drone_id)
 VALUES ('Medication 2', 250, 'M456', 'medication_2.jpg', 4);
 
-INSERT INTO medication (name, weight, code, image, drone_id)
+INSERT INTO medication (name, weight, code, image_url, drone_id)
 VALUES ('Medication 3', 50, 'M352', 'medication_3.jpg', 5);

@@ -85,7 +85,7 @@ java 17+ version
 1. Register drone
 
 ```
-POST /drone/register
+POST {root_url}/drone/register
 Body:
 {
    "serialNumber": "DRN011",
@@ -95,45 +95,35 @@ Body:
 }
 ```
 
-2. Load drone
+2. Load drone with 2 medication items with images:
 ```
-PUT /drone/2/load?isFinalLoad=true
-Body:
-{
-    "medications": 
-    [
-    {
-        "name": "54ygter",
-        "weight": 1,
-        "code": "4SJK",
-        "image": "medication_4.jpg"
-    },
-    {
-        "name": "54ygter",
-        "weight": 10,
-        "code": "M333",
-        "image": "medication_5.jpg"
-    }
-    ]
-}
+POST {root_url}/drone/2/load?isFinalLoad=true
+--form 'medications[0].name="54ygter"' \
+--form 'medications[0].weight="10"' \
+--form 'medications[0].code="4SJK"' \
+--form 'medications[0].image=@"/C:/url/example/medicine_image_1.jpg"' \
+--form 'medications[1].name="7twdhgu"' \
+--form 'medications[1].weight="20"' \
+--form 'medications[1].code="8GHS"' \
+--form 'medications[1].image=@"/C:/url/example/medicine_image_2.jpg"'
 ```
 
 3. Get loaded medications
 
 ```
-GET /drone/2/items
+GET {root_url}/drone/2/items
 ```
 
 4. Get available drones
 
 ```
-GET /drone/available
+GET {root_url}/drone/available
 ```
 
 5. Get battery level
 
 ```
-GET /drone/2/batteryLevel
+GET {root_url}/drone/2/batteryLevel
 ```
 
 ---

@@ -10,6 +10,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,7 @@ public class DroneServiceImpl implements DroneService {
             Set.of(Drone.State.IDLE, Drone.State.LOADING);
 
     private final DroneRepository droneRepository;
+    private final ImageStorageService imageStorageService;
 
     @Override
     public Drone create(DroneRegistrationDTO droneDTO) {
@@ -105,6 +107,13 @@ public class DroneServiceImpl implements DroneService {
                 .map(Drone::getBatteryLevel)
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Drone with id = %d not found.", droneId)));
+    }
+
+    private String saveImage(MultipartFile image) {
+        if (Objects.isNull(image)) {
+            return null;
+        }
+        return imageStorageService.saveImage(image);
     }
 
     private Drone fetchDrone(Integer droneId) {

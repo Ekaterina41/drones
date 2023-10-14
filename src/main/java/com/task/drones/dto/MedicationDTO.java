@@ -3,7 +3,9 @@ package com.task.drones.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Builder;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * DTO containing the information about the medication.
@@ -24,5 +26,5 @@ public class MedicationDTO {
             message = "For code only upper case letters, numbers and ‘_’ allowed")
     private String code;
 
-    private String image;
+    private MultipartFile image;
 }

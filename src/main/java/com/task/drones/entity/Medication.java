@@ -27,7 +27,7 @@ public class Medication {
 
     private String code;
 
-    private String image;
+    private String imageUrl;
 
     @JsonIgnore
     @ManyToOne
