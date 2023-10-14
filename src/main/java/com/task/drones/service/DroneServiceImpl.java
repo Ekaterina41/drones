@@ -1,9 +1,10 @@
 package com.task.drones.service;
 
+import com.task.drones.dto.MedicationDTO;
 import com.task.drones.entity.Drone;
 import com.task.drones.entity.Medication;
 import com.task.drones.exception.DroneLoadException;
-import com.task.drones.model.DroneRegistrationRequest;
+import com.task.drones.dto.DroneRegistrationDTO;
 import com.task.drones.repository.DroneRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -28,29 +29,36 @@ public class DroneServiceImpl implements DroneService {
     private final DroneRepository droneRepository;
 
     @Override
-    public Drone create(DroneRegistrationRequest droneRequest) {
+    public Drone create(DroneRegistrationDTO droneDTO) {
         Drone newDrone = new Drone()
-                .setSerialNumber(droneRequest.getSerialNumber())
-                .setModel(droneRequest.getModel())
-                .setWeightLimit(droneRequest.getWeightLimit())
-                .setBatteryLevel(droneRequest.getBatteryLevel())
+                .setSerialNumber(droneDTO.getSerialNumber())
+                .setModel(Drone.Model.valueOf(droneDTO.getModel().toUpperCase()))
+                .setWeightLimit(droneDTO.getWeightLimit())
+                .setBatteryLevel(droneDTO.getBatteryLevel())
                 .setState(Drone.State.IDLE);
 
         return droneRepository.save(newDrone);
     }
 
     @Override
-    public Drone load(Integer droneId, List<Medication> medications, boolean isFinalLoad)
-            throws EntityNotFoundException, DroneLoadException {
+    public Drone load(Integer droneId, List<MedicationDTO> medicationsDTOList,
+                      boolean isFinalLoad) {
+
         Drone drone = fetchDrone(droneId);
 
         if (!AVAILABLE_DRONE_STATES.contains(drone.getState())) {
             throw new DroneLoadException("Drone is not available for load.");
         }
 
-        if (medications.isEmpty()) {
-            throw new DroneLoadException("Nothing to load.");
-        }
+        List<Medication> medications = medicationsDTOList
+                .stream()
+                .map(dto -> new Medication()
+                        .setName(dto.getName())
+                        .setWeight(dto.getWeight())
+                        .setCode(dto.getCode())
+                        .setImage(dto.getImage())
+                        .setDrone(drone))
+                .toList();
 
         int totalLoadedWeight = getTotalWeight(medications);
         int droneRemainingWeight = drone.getWeightLimit() - getTotalWeight(
@@ -67,7 +75,6 @@ public class DroneServiceImpl implements DroneService {
             throw new DroneLoadException("Drone battery level is too low.");
         }
 
-        // Set relationship between drone and medications
         drone.getLoadedMedications().addAll(medications);
         medications.forEach(medication -> medication.setDrone(drone));
 

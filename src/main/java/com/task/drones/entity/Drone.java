@@ -1,6 +1,5 @@
 package com.task.drones.entity;
 
-import com.task.drones.enums.DroneModel;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -27,7 +26,7 @@ public class Drone {
     private String serialNumber;
 
     @Enumerated(EnumType.STRING)
-    private DroneModel model;
+    private Model model;
 
     private short weightLimit;
 
@@ -41,6 +40,19 @@ public class Drone {
 
     public enum State {
         IDLE, LOADING, LOADED, DELIVERING, DELIVERED, RETURNING
+    }
+
+    public enum Model {
+        LIGHTWEIGHT("Lightweight"),
+        MIDDLEWEIGHT("Middleweight"),
+        CRUISEWEIGHT("Cruiseweight"),
+        HEAVYWEIGHT("Heavyweight");
+
+        private final String name;
+
+        Model(String name) {
+            this.name = name;
+        }
     }
 
 }

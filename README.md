@@ -99,20 +99,23 @@ Body:
 ```
 PUT /drone/2/load?isFinalLoad=true
 Body:
-[
+{
+    "medications": 
+    [
     {
-        "name": "Medication 4",
-        "weight": 100,
-        "code": "M832",
+        "name": "54ygter",
+        "weight": 1,
+        "code": "4SJK",
         "image": "medication_4.jpg"
     },
     {
-        "name": "Medication 5",
-        "weight": 100,
+        "name": "54ygter",
+        "weight": 10,
         "code": "M333",
         "image": "medication_5.jpg"
     }
-]
+    ]
+}
 ```
 
 3. Get loaded medications

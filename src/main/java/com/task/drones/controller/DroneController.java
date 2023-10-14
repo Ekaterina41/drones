@@ -1,7 +1,8 @@
 package com.task.drones.controller;
 
-import com.task.drones.entity.Medication;
-import com.task.drones.model.DroneRegistrationRequest;
+import com.task.drones.dto.MedicationsListDTO;
+import com.task.drones.dto.DroneRegistrationDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,17 +16,17 @@ public interface DroneController {
 
     /**
      * Register a new drone in IDLE status.
-     * @param droneRegistrationRequest information for drone registration
+     * @param droneRegistrationDTO information for drone registration
      * @return registered drone
      */
     @PostMapping("/register")
     ResponseEntity<Object> register(
-            @RequestBody DroneRegistrationRequest droneRegistrationRequest);
+            @Valid @RequestBody DroneRegistrationDTO droneRegistrationDTO);
 
     /**
      * Load drone with medication items.
      * @param droneId drone to load
-     * @param medications medications for load
+     * @param medicationsDTO medications for load
      * @param isFinalLoad indicates if drone status will be changed to LOADED
      *                    or will remain LOADING in case when more loads are
      *                    expected
@@ -33,8 +34,9 @@ public interface DroneController {
      */
     @PutMapping("/{droneId}/load")
     ResponseEntity<Object> loadDrone(@PathVariable Integer droneId,
-                                    @RequestBody List<Medication> medications,
-                                    @RequestParam(defaultValue = "true") boolean isFinalLoad);
+                                     @RequestBody @Valid
+                                     MedicationsListDTO medicationsDTO,
+                                     @RequestParam(defaultValue = "true") boolean isFinalLoad);
 
     /**
      * Check loaded medication items for a given drone.

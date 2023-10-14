@@ -3,6 +3,7 @@ package com.task.drones.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -13,6 +14,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
  */
 @Data
 @Entity
+@Accessors(chain = true)
 public class Medication {
 
     @Id
